@@ -1,7 +1,6 @@
 function parseExpression(program) {
   program = skipSpace(program);
   let match, expr;
-  // TODO: why assignments work here as comparisons???
   if (match = /^"([^"]*)"/.exec(program)) {
     expr = {type: "value", value: match[1]};
   } else if (match = /^\d+\b/.exec(program)) {
@@ -50,8 +49,4 @@ function parse(program) {
   return expr;
 }
 
-console.log(parse("+(a, 10)"));
-// → {type: "apply",
-//    operator: {type: "word", name: "+"},
-//    args: [{type: "word", name: "a"},
-//           {type: "value", value: 10}]}
+module.exports = parse;

@@ -1,4 +1,4 @@
-const specialForms = Object.create(null);
+const specialForms = require('./SpecialForms');
 
 function evaluate(expr, scope) {
   if (expr.type == "value") {
@@ -25,3 +25,5 @@ function evaluate(expr, scope) {
     }
   }
 }
+
+module.exports = evaluate;
