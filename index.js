@@ -8,20 +8,21 @@ const topScope = require('./TheEnvironment');
 //    args: [{type: "word", name: "a"},
 //           {type: "value", value: 10}]}
 
-let prog = parse(`if(true, false, true)`);
-console.log(evaluate(prog, topScope));
+// let prog = parse(`if(true, false, true)`);
+// console.log(evaluate(prog, topScope));
 // → false
 
-// function run(program) {
-//   return evaluate(parse(program), Object.create(topScope));
-// }
-//
-// run(`
-// do(define(total, 0),
-//    define(count, 1),
-//    while(<(count, 11),
-//          do(define(total, +(total, count)),
-//             define(count, +(count, 1)))),
-//    print(total))
-// `);
+function run(program) {
+  console.log(parse(program), Object.create(topScope));
+  return evaluate(parse(program), Object.create(topScope));
+}
+
+run(`
+do(define(total, 0),
+   define(count, 1),
+   while(<(count, 11),
+         do(define(total, +(total, count)),
+            define(count, +(count, 1)))),
+   print(total))
+`);
 // → 55
