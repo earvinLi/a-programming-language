@@ -20,6 +20,6 @@ topScope.length = array => array.length;
 topScope.element = (array, index) => {
   if (!array[index]) throw new TypeError("Wrong index");
   return array[index];
-}
+};
 
 module.exports = topScope;

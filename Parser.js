@@ -14,12 +14,6 @@ function parseExpression(program) {
   return parseApply(expr, program.slice(match[0].length));
 }
 
-function skipSpace(string) {
-  let first = string.search(/\S/);
-  if (first == -1) return "";
-  return string.slice(first);
-}
-
 function parseApply(expr, program) {
   program = skipSpace(program);
   if (program[0] != "(") {
@@ -47,6 +41,14 @@ function parse(program) {
     throw new SyntaxError("Unexpected text after program");
   }
   return expr;
+}
+
+// COMMENTS included
+function skipSpace(string) {
+  string = string.replace(/#(.*)/g, ' ');
+  let first = string.search(/\S/);
+  if (first == -1) return "";
+  return string.slice(first);
 }
 
 module.exports = parse;
