@@ -40,6 +40,24 @@ specialForms.define = (args, scope) => {
   return value;
 };
 
+specialForms.set = (args, scope) => {
+  if (args.length !== 2 || args[0].type !== "word") {
+    throw new SyntaxError("Incorrect use of set");
+  }
+
+  let outerScope = Object.getPrototypeOf(scope);
+  let name = args[0].name;
+  let value = evaluate(args[1], scope);
+
+  if (!Object.prototype.hasOwnProperty.call(scope, name)) {
+    while (!Object.prototype.hasOwnProperty.call(outerScope, name)) {
+      outerScope = Object.getPrototypeOf(outerScope);
+      if (outerScope === null) throw new ReferenceError(`Undefined binding: ${name}`);
+    }
+    outerScope[args[0].name] = value;
+  }
+};
+
 specialForms.fun = (args, scope) => {
   if (!args.length) {
     throw new SyntaxError("Functions need a body");

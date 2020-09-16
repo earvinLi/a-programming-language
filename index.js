@@ -38,4 +38,11 @@ function run(program) {
 //    print(sum(array(1, 2, 3))))
 // `);
 
-console.log(parse("a # one\n   # two\n()"));
+// console.log(parse("a # one\n   # two\n()"));
+
+run(`
+  do(define(x, 4),
+   define(setx, fun(val, set(a, val))),
+   setx(50),
+   print(x))
+`);
