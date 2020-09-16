@@ -45,10 +45,8 @@ function parse(program) {
 
 // COMMENTS included
 function skipSpace(string) {
-  string = string.replace(/#(.*)/g, ' ');
-  let first = string.search(/\S/);
-  if (first == -1) return "";
-  return string.slice(first);
+  let skippable = string.match(/^(\s|#.*)*/);
+  return string.slice(skippable[0].length);
 }
 
 module.exports = parse;
